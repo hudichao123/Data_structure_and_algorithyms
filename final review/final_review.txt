@@ -1,0 +1,87 @@
+ FINAL REVIEW SHEET
+0. BRUTE FORCE
+WORST = AVERAGE = O(MN)
+BEST O(M)
+
+1.	Kmp failure table
+while j < length of pattern do
+if pattern[i] = pattern[j] then
+i ¡û i + 1
+failureTable[j] ¡û i
+j ¡û j + 1
+else 
+if i = 0 then
+failureTable[j] ¡û 0
+j ¡û j + 1
+else
+i ¡û failureTable[i ? 1] return failureTable
+
+2.	Kmp
+Loop condition : (textIndex + p.length() ¨C patternIndex <= t.length()
+Three cases : 1. PatternIndex = 0 : 
+                 TextIndex ++;
+	      2. PatternIndex = p.length()
+	         patternIndex = table[patternIndex - 1]
+                 list.add(textIndex - pattern.length)
+              3. 0<patternIndex<p.length()
+                 patternIndex = table[patternIndex - 1]
+
+BEST CASE : o(M) (first match)
+AVERAGE CASE: O(m + n)
+
+3. BOYERMORE last occurence table
+    Use hashmap
+    * == null ==> -1
+
+4. BOYERMORE 
+    offset = 0
+    shift = 0
+    loop condition : textIndex < t.length()
+         nested loop condition: t[textIndex] == p[patternIndex] && offset < p.length()
+
+BEST CASE : O(m) (FIRST MATCH)
+WORST CASE : O(mn)
+Average case : O(m + n)
+
+5. RABIN-CARP
+    a) generate hash(current, length)
+		To calculate the hash, the following formula is used:
+		sum(text[i] ¡Á BASE^(j?i))
+		O(m)
+    b) update hash(oldhash, oldchar, length, newchar)
+                Always O(1)
+    c) rabin karp
+                    if (textHash == patternHash) {
+                boolean match = true;
+                for (int i = 0; i < p.length() && match; i++) {
+                    if (comparator.compare(p.charAt(i), t.charAt(i + start)) != 0) {
+                        match = false;
+                    }
+                }
+                if (match) {
+                    l.add(start);
+                }
+            }
+            if (start + p.length() < t.length()) {
+                textHash = updateHash(textHash, p.length(), t.charAt(start), t.charAt(start + p.length()));
+            }
+            start ++;
+    worst case O(mn)      best case O(M)  average case O(m + n)
+
+
+//////////////////////////////GRAPH ALGORITHYMS////////////////////////////////////////////
+1. D F S (backed by stack)
+    What do we need?  -> a hashset , a stack and an arraylist
+    loop condition : stack is not empty
+
+2. BFS (backed by queue + can obtain shortest path)
+
+3. Dikjstras
+    loop condition :
+    data structure needed £º HashMap(Vertex<T>, Integer)   HashSet<Vertex<T>> PriorityQueue<Edge<T>>
+    remember: add new vertex obtained from Priorityqueue to the hashset
+              do not visit vertices already in the visited list
+              initialize the hashmap with (v, INFINITY)
+
+4. Krudcals
+    loop condition : £¡isEmpty() + count < size + 1
